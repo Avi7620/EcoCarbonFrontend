@@ -50,7 +50,7 @@ function Admin() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await fetch("https://your-backend.onrender.com/api/contact");
+      const response = await fetch("https://ecocarbonbackend.onrender.com/api/contact");
       const data = await response.json();
       setFormSubmissions(data);
     } catch (error) {
