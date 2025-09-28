@@ -67,7 +67,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
     {
       icon: <Phone className="h-6 w-6" />,
       title: 'Phone',
-      details: ['+1 (555) 123-4567', '+1 (555) 123-4568']
+      details: ['+91 XXX XXX XXX', '+91 XXX XXX XXX']
     },
     {
       icon: <Mail className="h-6 w-6" />,
@@ -77,7 +77,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
     {
       icon: <MapPin className="h-6 w-6" />,
       title: 'Office',
-      details: ['123 Green Street', 'Sustainability City, SC 12345']
+      details: ['Konark Alpha, Sr No 50, 2, Nagar Road, Kharadi, Pune, Maharashtra']
     },
     {
       icon: <Clock className="h-6 w-6" />,
@@ -88,21 +88,21 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
 
   const offices = [
     {
-      city: 'New York',
-      address: '123 Green Street, NY 10001',
-      phone: '+1 (555) 123-4567',
+      city: 'Pune',
+      address: 'Kharadi, Pune',
+      phone: '+91 XXX XXX XXX',
       image: 'https://images.pexels.com/photos/2190283/pexels-photo-2190283.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
     },
     {
-      city: 'San Francisco',
-      address: '456 Eco Avenue, SF 94102',
-      phone: '+1 (555) 987-6543',
+      city: 'Kolkata',
+      address: 'Ruby, Kolkata',
+      phone: '+91 XXX XXX XXX',
       image: 'https://images.pexels.com/photos/1024248/pexels-photo-1024248.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
     },
     {
-      city: 'London',
-      address: '789 Sustainability Lane, London EC1A 1BB',
-      phone: '+44 20 7123 4567',
+      city: 'pune',
+      address: 'Kalyani Nagar, Pune',
+      phone: '+91 XXX XXX XXX',
       image: 'https://images.pexels.com/photos/1497394/pexels-photo-1497394.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
     }
   ];
@@ -380,7 +380,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
             <div className="text-center text-gray-600">
               <MapPin className="h-16 w-16 mx-auto mb-4" />
               <p className="text-lg">Interactive Map</p>
-              <p className="text-sm">123 Green Street, Sustainability City, SC 12345</p>
+              <p className="text-sm">Konark Alpha, Sr No 50, 2, Nagar Road, Kharadi, Pune, Maharashtra</p>
             </div>
           </motion.div>
         </div>

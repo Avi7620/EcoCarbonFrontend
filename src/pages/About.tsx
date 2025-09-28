@@ -27,25 +27,25 @@ const About = () => {
 
   const team = [
     {
-      name: 'Dr. Sarah Green',
+      name: 'Name',
       position: 'CEO & Founder',
       image: 'https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
       bio: '15+ years in environmental science and sustainable development'
     },
     {
-      name: 'Michael Rodriguez',
+      name: 'Name',
       position: 'CTO',
       image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
       bio: 'Technology leader specializing in environmental monitoring systems'
     },
     {
-      name: 'Emily Chen',
+      name: 'Name',
       position: 'Head of Projects',
       image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
       bio: 'Expert in renewable energy project development and management'
     },
     {
-      name: 'David Thompson',
+      name: 'Name',
       position: 'Sustainability Director',
       image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
       bio: 'Environmental policy specialist with global NGO experience'
