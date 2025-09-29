@@ -27,7 +27,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/Admin" element={<Admin />} />
-            <Route path="/adminlogin" element={<AdminLogin />} />
+            <Route path="/AdminLogin" element={<AdminLogin />} />
           </Routes>
         </motion.main>
         <Footer />
