@@ -101,11 +101,11 @@ const Footer: React.FC = () => {
                   </div>
                   <div className="flex items-center space-x-1">
                     <Phone className="h-4 w-4 text-green-400" />
-                    <span>+1 (555) 123-4567</span>
+                    <span>+91 XXX XXX XXX</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <span className="font-semibold text-green-400">Address:</span>
-                    <span>123 Green St, San Francisco, CA</span>
+                    <span>Konark Apha , Kharadi , Pune</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <span className="font-semibold text-green-400">Hours:</span>

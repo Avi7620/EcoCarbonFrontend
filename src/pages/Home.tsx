@@ -7,12 +7,7 @@ import AnimatedCounter from '../components/AnimatedCounter';
 const Home = () => {
   
    const features = [
-    {
-      icon: <Leaf className="h-8 w-8" />,
-      title: 'Carbon Offsetting',
-      description: 'Comprehensive carbon offset solutions to neutralize your environmental impact.',
-      image: 'https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'
-    },
+
     {
       icon: <Wind className="h-8 w-8" />,
       title: 'Renewable Energy',
@@ -24,6 +19,12 @@ const Home = () => {
       title: 'Forest Conservation',
       description: 'Protecting and restoring forests to preserve biodiversity and capture carbon.',
       image: 'https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'
+    },
+        {
+      icon: <Leaf className="h-8 w-8" />,
+      title: 'Carbon Offsetting',
+      description: 'Comprehensive carbon offset solutions to neutralize your environmental impact.',
+      image: 'https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop'
     },
     {
       icon: <Sun className="h-8 w-8" />,
@@ -104,7 +105,7 @@ const Home = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/9800029/pexels-photo-9800029.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop)'
+            backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop)'
           }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -131,15 +132,15 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link
+            {/* <Link
               to="/projects"
               className="bg-green-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
             >
               Explore Projects <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+            </Link> */}
             <Link
               to="/contact"
-              className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105"
+              className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-900 transition-all duration-300 transform hover:scale-90"
             >
               Get Started
             </Link>
@@ -157,7 +158,7 @@ const Home = () => {
        
        {/* Features Section */}
       <section id="stats" className="py-20 bg-white">
-        <div> <AnimatedCounter /></div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -378,6 +379,7 @@ const Home = () => {
             })}
           </div>
         </div>
+        <div> <AnimatedCounter /></div>
       </section>
 
       {/* Testimonials */}
