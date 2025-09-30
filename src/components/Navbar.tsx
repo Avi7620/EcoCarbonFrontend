@@ -8,11 +8,9 @@ const Navbar = () => {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' },
     { name: 'Admin', href: '/Admin' },
-
   ];
 
   const servicesDropdown = [
@@ -44,35 +42,39 @@ const Navbar = () => {
             <span className="text-xl font-bold text-gray-900">EcoCarbon</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${location.pathname === item.href
-                    ? 'text-green-600'
-                    : 'text-gray-700 hover:text-green-600'
-                  }`}
-              >
-                {item.name}
-                {location.pathname === item.href && (
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600"
-                    layoutId="navbar-indicator"
-                  />
-                )}
-              </Link>
-            ))}
+          
 
-            {/* Services Dropdown */}
+          {/* Desktop Navigation */}
+
+          
+          <div className="hidden md:flex items-center space-x-8">
+
+             {/* Home NEXT */}
+            <Link
+              to="/"
+              className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                location.pathname === '/'
+                  ? 'text-green-600'
+                  : 'text-gray-700 hover:text-green-600'
+              }`}
+            >
+              Home
+              {location.pathname === '/' && (
+                <motion.div
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600"
+                  layoutId="navbar-indicator"
+                />
+              )}
+            </Link>
+            {/* Services Dropdown FIRST */}
             <div className="relative group">
               <Link
                 to="/services"
-                className={`flex items-center px-3 py-2 text-sm font-medium transition-colors duration-300 ${location.pathname === '/services'
+                className={`flex items-center px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                  location.pathname === '/services'
                     ? 'text-green-600'
                     : 'text-gray-700 hover:text-green-600'
-                  }`}
+                }`}
               >
                 Services
                 <ChevronDown className="ml-1 h-4 w-4" />
@@ -95,15 +97,15 @@ const Navbar = () => {
               </div>
             </div>
 
-
-            {/* Projects Dropdown */}
+            {/* Projects Dropdown SECOND */}
             <div className="relative group">
               <Link
                 to="/projects"
-                className={`flex items-center px-3 py-2 text-sm font-medium transition-colors duration-300 ${location.pathname.includes('/projects')
+                className={`flex items-center px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                  location.pathname.includes('/projects')
                     ? 'text-green-600'
                     : 'text-gray-700 hover:text-green-600'
-                  }`}
+                }`}
               >
                 Projects
                 <ChevronDown className="ml-1 h-4 w-4" />
@@ -126,7 +128,30 @@ const Navbar = () => {
               </div>
             </div>
 
+           
 
+            {/* Other Nav Items */}
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                  location.pathname === item.href
+                    ? 'text-green-600'
+                    : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                {item.name}
+                {location.pathname === item.href && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600"
+                    layoutId="navbar-indicator"
+                  />
+                )}
+              </Link>
+            ))}
+
+            {/* CTA */}
             <Link
               to="/contact"
               className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors duration-300"
@@ -153,39 +178,62 @@ const Navbar = () => {
             className="md:hidden bg-white border-t border-gray-100"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
+              {/* Services FIRST */}
+              <Link
+                to="/services"
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  location.pathname === '/services'
+                    ? 'text-green-600 bg-green-50'
+                    : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Services
+              </Link>
+
+              {/* Projects SECOND */}
+              <Link
+                to="/projects"
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  location.pathname.includes('/projects')
+                    ? 'text-green-600 bg-green-50'
+                    : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Projects
+              </Link>
+
+              {/* Home NEXT
+              <Link
+                to="/"
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  location.pathname === '/'
+                    ? 'text-green-600 bg-green-50'
+                    : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </Link> */}
+
+              {/* Other Navigation */}
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === item.href
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    location.pathname === item.href
                       ? 'text-green-600 bg-green-50'
                       : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
-                    }`}
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Link
-                to="/services"
-                className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === '/services'
-                    ? 'text-green-600 bg-green-50'
-                    : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
-                  }`}
-                onClick={() => setIsOpen(false)}
-              >
-                Services
-              </Link>
-              <Link
-                to="/projects"
-                className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === '/projects'
-                    ? 'text-green-600 bg-green-50'
-                    : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
-                  }`}
-                onClick={() => setIsOpen(false)}
-              >
-                Projects
-              </Link>
+
+              {/* CTA */}
               <Link
                 to="/contact"
                 className="block mx-3 mt-4 text-center bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors duration-300"

@@ -359,32 +359,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Find Us</h2>
-            <p className="text-xl text-gray-600">Visit our headquarters in Sustainability City</p>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-gray-200 rounded-xl h-96 flex items-center justify-center"
-          >
-            <div className="text-center text-gray-600">
-              <MapPin className="h-16 w-16 mx-auto mb-4" />
-              <p className="text-lg">Interactive Map</p>
-              <p className="text-sm">Konark Alpha, Sr No 50, 2, Nagar Road, Kharadi, Pune, Maharashtra</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+     
     </div>
   );
 };

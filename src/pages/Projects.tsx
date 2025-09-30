@@ -1,293 +1,321 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Calendar, Leaf, ArrowRight } from 'lucide-react';
-import AnimatedCounter from '../components/AnimatedCounter';
+import React, { useState } from 'react';
+import { MapPin, Calendar, Target, Filter, ChevronRight } from 'lucide-react';
 
-const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
+interface Project {
+  id: string;
+  title: string;
+  location: string;
+  type: string;
+  impact: string;
+  date: string;
+  image: string;
+  description: string;
+  status: 'active' | 'completed' | 'upcoming';
+}
 
-  const filters = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'renewable', name: 'Renewable Energy' },
-    { id: 'forest', name: 'Forest Conservation' },
-    { id: 'solar', name: 'Solar Energy' },
-    { id: 'wind', name: 'Wind Power' }
-  ];
+const Projects: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<string>('all');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const projects = [
+  const projects: Project[] = [
     {
-      id: 1,
+      id: '1',
       title: 'Amazon Rainforest Conservation',
-      category: 'forest',
       location: 'Brazil',
-      year: '2024',
-      impact: '500,000',
-      unit: 'tonnes CO₂/year',
-      image: 'https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      description: 'Protecting 10,000 hectares of primary rainforest while supporting local communities through sustainable economic alternatives.',
-      status: 'Active',
-      verified: true
+      type: 'Forest Conservation',
+      impact: '450,000 tons CO₂/year',
+      date: '2023',
+      image: 'https://images.pexels.com/photos/1108701/pexels-photo-1108701.jpeg',
+      description: 'Protecting 10,000 hectares of pristine Amazon rainforest while supporting indigenous communities.',
+      status: 'active'
     },
     {
-      id: 2,
-      title: 'Texas Wind Farm Project',
-      category: 'wind',
+      id: '2',
+      title: 'Wind Power Initiative',
       location: 'Texas, USA',
-      year: '2023',
-      impact: '750,000',
-      unit: 'tonnes CO₂/year',
-      image: 'https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      description: 'Large-scale wind energy project generating clean electricity for 200,000 homes while creating local jobs.',
-      status: 'Active',
-      verified: true
+      type: 'Renewable Energy',
+      impact: '350,000 tons CO₂/year',
+      date: '2023',
+      image: 'https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg',
+      description: 'Large-scale wind farm generating clean energy for 150,000 homes annually.',
+      status: 'active'
     },
     {
-      id: 3,
-      title: 'Indian Solar Initiative',
-      category: 'solar',
-      location: 'Rajasthan, India',
-      year: '2024',
-      impact: '300,000',
-      unit: 'tonnes CO₂/year',
-      image: 'https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      description: 'Distributed solar program providing clean energy access to rural communities while reducing emissions.',
-      status: 'Active',
-      verified: true
+      id: '3',
+      title: 'Mangrove Restoration',
+      location: 'Philippines',
+      type: 'Marine Conservation',
+      impact: '125,000 tons CO₂/year',
+      date: '2024',
+      image: 'https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg',
+      description: 'Restoring coastal mangrove ecosystems to protect communities and sequester carbon.',
+      status: 'upcoming'
     },
     {
-      id: 4,
-      title: 'African Reforestation Program',
-      category: 'forest',
-      location: 'Kenya',
-      year: '2023',
-      impact: '200,000',
-      unit: 'tonnes CO₂/year',
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      description: 'Community-led reforestation program planting native species and providing sustainable livelihoods.',
-      status: 'Active',
-      verified: true
+      id: '4',
+      title: 'Solar Farm Project',
+      location: 'Morocco',
+      type: 'Renewable Energy',
+      impact: '500,000 tons CO₂/year',
+      date: '2022',
+      image: 'https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg',
+      description: 'Massive solar installation providing clean energy across North Africa.',
+      status: 'completed'
     },
     {
-      id: 5,
-      title: 'Nordic Hydroelectric Expansion',
-      category: 'renewable',
-      location: 'Norway',
-      year: '2024',
-      impact: '450,000',
-      unit: 'tonnes CO₂/year',
-      image: 'https://images.pexels.com/photos/1108175/pexels-photo-1108175.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      description: 'Upgrading existing hydroelectric infrastructure to increase clean energy generation capacity.',
-      status: 'In Development',
-      verified: false
+      id: '5',
+      title: 'Reforestation Program',
+      location: 'Indonesia',
+      type: 'Forest Conservation',
+      impact: '200,000 tons CO₂/year',
+      date: '2023',
+      image: 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg',
+      description: 'Large-scale tree planting initiative restoring degraded forest landscapes.',
+      status: 'active'
     },
     {
-      id: 6,
-      title: 'California Solar Farm Network',
-      category: 'solar',
-      location: 'California, USA',
-      year: '2023',
-      impact: '600,000',
-      unit: 'tonnes CO₂/year',
-      image: 'https://images.pexels.com/photos/9800029/pexels-photo-9800029.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      description: 'Network of utility-scale solar installations providing clean energy to the California grid.',
-      status: 'Active',
-      verified: true
+      id: '6',
+      title: 'Methane Capture Facility',
+      location: 'Netherlands',
+      type: 'Waste Management',
+      impact: '180,000 tons CO₂/year',
+      date: '2024',
+      image: 'https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg',
+      description: 'Converting agricultural waste methane into clean energy.',
+      status: 'upcoming'
     }
   ];
 
+  const filters = ['all', 'Forest Conservation', 'Renewable Energy', 'Marine Conservation', 'Waste Management'];
+
   const filteredProjects = activeFilter === 'all' 
     ? projects 
-    : projects.filter(project => project.category === activeFilter);
+    : projects.filter(project => project.type === activeFilter);
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'bg-green-100 text-green-800';
+      case 'completed': return 'bg-blue-100 text-blue-800';
+      case 'upcoming': return 'bg-yellow-100 text-yellow-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
 
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop)'
-          }}
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-          >
+    <section id="projects" className="py-20 bg-gray-50">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             Our Impact Projects
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-gray-200 max-w-3xl mx-auto"
-          >
-            Verified carbon offset projects around the world creating measurable environmental and social impact.
-          </motion.p>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover our verified carbon offset projects making a real difference 
+            in communities and ecosystems worldwide
+          </p>
         </div>
-      </section>
 
-      {/* Impact Stats */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                <AnimatedCounter end={2.8} decimals={1} suffix="M" />
-              </div>
-              <p className="text-gray-600">Total CO₂ Offset (tonnes)</p>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                <AnimatedCounter end={25} suffix="+" />
-              </div>
-              <p className="text-gray-600">Active Projects</p>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                <AnimatedCounter end={12} suffix="" />
-              </div>
-              <p className="text-gray-600">Countries</p>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                <AnimatedCounter end={1.2} decimals={1} suffix="M" />
-              </div>
-              <p className="text-gray-600">Trees Planted</p>
-            </div>
-          </div>
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <Filter className="h-5 w-5 text-gray-400 self-center mr-2" />
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
+                activeFilter === filter
+                  ? 'bg-green-600 text-white shadow-md'
+                  : 'bg-white text-gray-600 hover:bg-green-50 hover:text-green-600'
+              }`}
+            >
+              {filter === 'all' ? 'All Projects' : filter}
+            </button>
+          ))}
         </div>
-      </section>
 
-      {/* Project Filters */}
-      <section className="py-8 bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            {filters.map((filter) => (
-              <button
-                key={filter.id}
-                onClick={() => setActiveFilter(filter.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                  activeFilter === filter.id
-                    ? 'bg-green-600 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                {filter.name}
-              </button>
-            ))}
-          </div>
+        {/* Projects Grid */}
+        {/* Desktop Grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project) => (
+            <div
+              key={project.id}
+              className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-2"
+              onClick={() => setSelectedProject(project)}
+            >
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute top-4 right-4">
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
+                    {project.status}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <div className="flex items-center space-x-2 text-sm text-gray-500 mb-3">
+                  <MapPin className="h-4 w-4" />
+                  <span>{project.location}</span>
+                  <span className="text-gray-300">•</span>
+                  <Calendar className="h-4 w-4" />
+                  <span>{project.date}</span>
+                </div>
+                
+                <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-green-600 transition-colors">
+                  {project.title}
+                </h3>
+                
+                <p className="text-gray-600 mb-4 line-clamp-2">
+                  {project.description}
+                </p>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2 text-green-600">
+                    <Target className="h-4 w-4" />
+                    <span className="font-medium text-sm">{project.impact}</span>
+                  </div>
+                  
+                  <button className="flex items-center space-x-1 text-green-600 hover:text-green-700 font-medium group-hover:translate-x-1 transition-transform duration-200">
+                    <span className="text-sm">Learn More</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </section>
 
-      {/* Projects Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <motion.div
+        {/* Mobile Horizontal Scroll */}
+        <div className="md:hidden">
+          <div className="flex space-x-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+            {filteredProjects.map((project) => (
+              <div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group"
+                className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer snap-center flex-shrink-0 w-80"
+                onClick={() => setSelectedProject(project)}
               >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={project.image} 
+                <div className="relative h-40 overflow-hidden">
+                  <img
+                    src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      project.status === 'Active' 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-yellow-100 text-yellow-800'
-                    }`}>
+                  <div className="absolute top-3 right-3">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
                       {project.status}
                     </span>
                   </div>
-                  {project.verified && (
-                    <div className="absolute top-4 right-4">
-                      <div className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
-                        Verified
-                      </div>
-                    </div>
-                  )}
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{project.description}</p>
-                  
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                    <div className="flex items-center">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      {project.location}
-                    </div>
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {project.year}
-                    </div>
+                
+                <div className="p-5">
+                  <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                    <MapPin className="h-3 w-3" />
+                    <span>{project.location}</span>
+                    <span className="text-gray-300">•</span>
+                    <Calendar className="h-3 w-3" />
+                    <span>{project.date}</span>
                   </div>
                   
-                  <div className="border-t pt-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="flex items-center text-green-600 mb-1">
-                          <Leaf className="h-4 w-4 mr-1" />
-                          <span className="text-sm font-medium">Carbon Impact</span>
-                        </div>
-                        <div className="text-2xl font-bold text-gray-900">
-                          {project.impact}
-                        </div>
-                        <div className="text-sm text-gray-500">{project.unit}</div>
-                      </div>
-                      <button className="bg-green-600 text-white p-2 rounded-full hover:bg-green-700 transition-colors">
-                        <ArrowRight className="h-5 w-5" />
-                      </button>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-green-600 transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-3 text-sm line-clamp-2">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-1 text-green-600">
+                      <Target className="h-3 w-3" />
+                      <span className="font-medium text-xs">{project.impact}</span>
                     </div>
+                    
+                    <button className="flex items-center space-x-1 text-green-600 hover:text-green-700 font-medium group-hover:translate-x-1 transition-transform duration-200">
+                      <span className="text-xs">Learn More</span>
+                      <ChevronRight className="h-3 w-3" />
+                    </button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Project Map Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+        {/* Project Modal */}
+        {selectedProject && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="relative h-64">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <div className="p-8">
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedProject.status)}`}>
+                    {selectedProject.status}
+                  </span>
+                  <span className="text-sm text-gray-500">{selectedProject.type}</span>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  {selectedProject.title}
+                </h3>
+                
+                <div className="flex items-center space-x-4 text-gray-600 mb-6">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-4 w-4" />
+                    <span>{selectedProject.location}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Target className="h-4 w-4" />
+                    <span>{selectedProject.impact}</span>
+                  </div>
+                </div>
+                
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {selectedProject.description}
+                </p>
+                
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* CTA Section */}
+        <div className="text-center mt-16">
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">
+            Want to Support These Projects?
+          </h3>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Join thousands of organizations making a real impact through verified carbon offset projects
+          </p>
+          <button 
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-green-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-700 transition-colors transform hover:scale-105"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Global Reach</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our projects span across continents, creating positive environmental impact worldwide.
-            </p>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white rounded-xl shadow-lg p-8 text-center"
-          >
-            <img 
-              src="https://images.pexels.com/photos/355935/pexels-photo-355935.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
-              alt="World map showing project locations"
-              className="w-full rounded-lg"
-            />
-            <p className="text-gray-600 mt-4">
-              Interactive project map showing our global carbon offset initiatives across 12 countries.
-            </p>
-          </motion.div>
+            Start Offsetting Today
+          </button>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
