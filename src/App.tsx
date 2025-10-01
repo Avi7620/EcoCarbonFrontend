@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -10,13 +11,26 @@ import Contact from './pages/Contact';
 import Admin from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import ScrollRestoration from './components/ScrollRestoration';
+import ChatBot from './components/ChatBot';
+
+import ChatBotButton from './components/ChatBotButton';
+
 
 function App() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   return (
     <Router>
       <ScrollRestoration />
       <div className="min-h-screen bg-white">
         <Navbar />
+
+        {/* Chatbot Floating Button */}
+        <ChatBotButton onClick={() => setIsChatOpen(true)} />
+        <ChatBot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+
+      
+
         <motion.main
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -30,8 +44,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/Admin" element={<Admin />} />
             <Route path="/AdminLogin" element={<AdminLogin />} />
+            <Route path="/ChatBot" element={<ChatBot isOpen={true} onClose={() => {}} />} />
+           
           </Routes>
         </motion.main>
+
         <Footer />
       </div>
     </Router>

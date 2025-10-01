@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import { useCallback, useRef, useEffect, useState } from 'react';
 import AnimatedCounter from '../components/AnimatedCounter';
 
+import ChatBotButton from '../components/ChatBotButton';
+
 const Home = () => {
-  
+
+
    const features = [
 
     {
@@ -99,7 +102,11 @@ const Home = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   return (
+    
+
     <div className="pt-16">
+
+      
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div
