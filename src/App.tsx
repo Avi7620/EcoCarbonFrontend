@@ -9,10 +9,12 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Admin from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
+import ScrollRestoration from './components/ScrollRestoration';
 
 function App() {
   return (
     <Router>
+      <ScrollRestoration />
       <div className="min-h-screen bg-white">
         <Navbar />
         <motion.main
