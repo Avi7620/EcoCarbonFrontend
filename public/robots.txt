@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ecocarbon.onrender.com/
+
+# Sitemaps
+Sitemap: https://ecocarbon.onrender.com/sitemap.xml
