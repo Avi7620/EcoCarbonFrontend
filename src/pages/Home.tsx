@@ -519,7 +519,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Ready to Make a Difference?
+              Ready to Make a Difference? 
             </h2>
             <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
               Join hundreds of companies taking action on climate change. Start your carbon offset journey today.

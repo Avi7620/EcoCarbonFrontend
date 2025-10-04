@@ -52,7 +52,6 @@ const Footer: React.FC = () => {
       ]
     }
   ];
-
   return (
     <footer id="footer" className="bg-gray-900 text-white">
       <div className="container mx-auto px-6">

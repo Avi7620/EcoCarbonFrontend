@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Users, 
-  Mail, 
-  Building2, 
-  Phone, 
+import {
+  Users,
+  Mail,
+  Building2,
+  Phone,
   Calendar,
   Search,
   Filter,
@@ -31,6 +31,8 @@ type FormSubmission = {
 
 function Admin() {
   const [formSubmissions, setFormSubmissions] = useState<FormSubmission[]>([]);
+  const [authorized, setAuthorized] = useState<boolean | null>(null); // null = checking, true = allowed, false = unauthorized
+
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedService, setSelectedService] = useState('all');
@@ -62,14 +64,35 @@ function Admin() {
   };
 
   useEffect(() => {
-    fetchData();
+    const checkSession = async () => {
+      try {
+        const res = await fetch("https://ecocarbon.onrender.com/api/session", {
+          credentials: "include",
+        });
+        const data = await res.json();
+
+        if (!data.admin) {
+          setAuthorized(false); // unauthorized
+        } else {
+          setAuthorized(true); // allowed
+          fetchData(); // fetch submissions
+        }
+      } catch (err) {
+        console.error(err);
+        setAuthorized(false); // unauthorized
+      }
+    };
+
+    checkSession();
   }, []);
+
+
 
   // Filter submissions based on search and service
   const filteredSubmissions = formSubmissions.filter(submission => {
     const matchesSearch = submission.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         submission.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         (submission.company && submission.company.toLowerCase().includes(searchTerm.toLowerCase()));
+      submission.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (submission.company && submission.company.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesService = selectedService === 'all' || submission.service === selectedService;
     return matchesSearch && matchesService;
   });
@@ -89,7 +112,7 @@ function Admin() {
     const startOfWeek = new Date(now);
     startOfWeek.setDate(now.getDate() - now.getDay()); // Start of current week (Sunday)
     startOfWeek.setHours(0, 0, 0, 0);
-    
+
     const submissionDate = new Date(sub.created_at);
     return submissionDate >= startOfWeek && submissionDate <= now;
   }).length;
@@ -143,9 +166,38 @@ function Admin() {
     }
   };
 
+  if (authorized === null) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500 text-lg">Checking authorization...</p>
+      </div>
+    );
+  }
+
+  if (authorized === false) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white shadow-md rounded-lg p-8 text-center w-96">
+          <h2 className="text-xl font-bold mb-4 text-red-600">Unauthorized</h2>
+          <p className="text-gray-700 mb-4">You are not authorized to access this page.</p>
+          <a
+            href="/adminlogin"
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Go to Login
+          </a>
+
+        </div>
+      </div>
+    );
+  }
+
+
   return (
     <>
+
       <Navbar />
+
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-36 md:pt-36 pt-44">
         {/* Header */}
         <div className="bg-white shadow-lg border-b border-gray-200 fixed top-16 left-0 right-0 z-40 md:z-50">
@@ -158,14 +210,14 @@ function Admin() {
                 {/* <p className="text-gray-600 mt-1">Manage and track all website form submissions</p> */}
               </div>
               <div className="flex items-center space-x-4">
-                <button 
+                <button
                   onClick={exportToCSV}
                   className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                 >
                   <Download className="w-4 h-4" />
                   <span>Export CSV</span>
                 </button>
-                <button 
+                <button
                   onClick={fetchData}
                   disabled={loading}
                   className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -229,7 +281,7 @@ function Admin() {
               </div>
             </div>
 
-    
+
           </div>
 
           {/* Services Distribution */}
@@ -300,7 +352,7 @@ function Admin() {
                   Showing {filteredSubmissions.length} of {totalSubmissions} submissions
                 </p>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
