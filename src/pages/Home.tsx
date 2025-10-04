@@ -5,6 +5,7 @@ import { useCallback, useRef, useEffect, useState } from 'react';
 import AnimatedCounter from '../components/AnimatedCounter';
 
 import ChatBotButton from '../components/ChatBotButton';
+import Contact from '../pages/Contact';
 
 const Home = () => {
 
@@ -112,7 +113,7 @@ const Home = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop)'
+            backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(images/s2.png)'
           }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -538,9 +539,9 @@ const Home = () => {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <Contact />
         </div>
-      </section> */}
+      </section>  */}
 
-      {/* Scroll Indicator */}
+     
 
     </div>
   );
