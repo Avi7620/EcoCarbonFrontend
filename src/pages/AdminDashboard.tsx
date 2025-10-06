@@ -54,7 +54,7 @@ function Admin() {
 const fetchData = async () => {
   try {
     setLoading(true);
-    const response = await fetch("https://ecocarbonbackend.onrender.com/api/contacts", {
+    const response = await fetch("http://127.0.0.1:5000/api/contacts", {
       credentials: "include",  // ✅ send session cookie
     });
 
@@ -76,7 +76,7 @@ const fetchData = async () => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("https://ecocarbon.onrender.com/api/session", {
+        const res = await fetch("http://127.0.0.1:5000/api/session", {
           credentials: "include",
         });
         const data = await res.json();
@@ -176,31 +176,31 @@ const fetchData = async () => {
     }
   };
 
-  if (authorized === null) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500 text-lg">Checking authorization...</p>
-      </div>
-    );
-  }
+  // if (authorized === null) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen">
+  //       <p className="text-gray-500 text-lg">Checking authorization...</p>
+  //     </div>
+  //   );
+  // }
 
-  if (authorized === false) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white shadow-md rounded-lg p-8 text-center w-96">
-          <h2 className="text-xl font-bold mb-4 text-red-600">Unauthorized</h2>
-          <p className="text-gray-700 mb-4">You are not authorized to access this page.</p>
-          <a
-            href="/adminlogin"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Go to Login
-          </a>
+  // if (authorized === false) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+  //       <div className="bg-white shadow-md rounded-lg p-8 text-center w-96">
+  //         <h2 className="text-xl font-bold mb-4 text-red-600">Unauthorized</h2>
+  //         <p className="text-gray-700 mb-4">You are not authorized to access this page.</p>
+  //         <a
+  //           href="/adminlogin"
+  //           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+  //         >
+  //           Go to Login
+  //         </a>
 
-        </div>
-      </div>
-    );
-  }
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
 
   return (
