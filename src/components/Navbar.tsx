@@ -9,7 +9,7 @@ type NavItem = { name: string; href: string };
 const navigation: NavItem[] = [
   { name: "About Us", href: "/about" },
   { name: "Contact", href: "/contact" },
-  { name: "Admin", href: "/admin" },
+  // { name: "Admin", href: "/admin" },
 ];
 
 const servicesDropdown: NavItem[] = [
