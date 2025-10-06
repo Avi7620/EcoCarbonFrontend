@@ -10,19 +10,19 @@ const About = () => {
 
 
   const values = [
-
-  {
-    title: "Sustainability",
-    description: "Committed to long-term environmental solutions that benefit future generations.",
-    detailedDescription: "Our approach goes beyond short-term fixes. We design and implement solutions that create lasting environmental benefits for decades to come. By focusing on renewable energy infrastructure, ecosystem restoration, and sustainable agriculture, we ensure that our projects continue to reduce emissions and protect natural resources long into the future. We believe that true sustainability means creating systems that work in harmony with nature, supporting both ecological health and human prosperity for generations to come.",
-    image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
-  },
   {
     title: "Partnership",
     description: "Working closely with clients to develop customized sustainability strategies.",
     detailedDescription: "We don't believe in one-size-fits-all solutions. Every organization has unique challenges and opportunities when it comes to sustainability. Our team works hand-in-hand with your business to understand your specific needs, goals, and constraints. Together, we develop comprehensive strategies that align with your corporate values while delivering measurable environmental impact. From initial consultation to ongoing support, we're committed to being your trusted partner in the journey toward carbon neutrality and beyond.",
     image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
   },
+  {
+    title: "Sustainability",
+    description: "Committed to long-term environmental solutions that benefit future generations.",
+    detailedDescription: "Our approach goes beyond short-term fixes. We design and implement solutions that create lasting environmental benefits for decades to come. By focusing on renewable energy infrastructure, ecosystem restoration, and sustainable agriculture, we ensure that our projects continue to reduce emissions and protect natural resources long into the future. We believe that true sustainability means creating systems that work in harmony with nature, supporting both ecological health and human prosperity for generations to come.",
+    image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+  },
+
   {
     title: "Excellence",
     description: "Maintaining the highest standards in carbon offset verification and reporting.",
