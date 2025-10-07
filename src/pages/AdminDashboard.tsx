@@ -54,7 +54,7 @@ function Admin() {
 const fetchData = async () => {
   try {
     setLoading(true);
-    const response = await fetch("http://127.0.0.1:5000/api/contacts", {
+    const response = await fetch("https://ecocarbonbackend.onrender.com/api/contacts", {
       credentials: "include",  // ✅ send session cookie
     });
 
@@ -76,7 +76,7 @@ const fetchData = async () => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("http://127.0.0.1:5000/api/session", {
+        const res = await fetch("https://ecocarbonbackend.onrender.com/api/session", {
           credentials: "include",
         });
         const data = await res.json();
