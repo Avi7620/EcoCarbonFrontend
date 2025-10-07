@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Leaf, Wind, Sun, Trees, ArrowDown } from 'lucide-react';
+import { ArrowRight, Leaf, Wind, Sun, Trees, ArrowDown, BarChart, Globe, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCallback, useRef, useEffect, useState } from 'react';
 import AnimatedCounter from '../components/AnimatedCounter';
@@ -388,6 +388,57 @@ const Home = () => {
           </div>
         </div>
         <div> <AnimatedCounter /></div>
+      </section>
+
+       {/* How It Works Section */}
+      <section className="py-20 bg-gradient-to-br from-green-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">How It Works</h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              Simple steps to offset your carbon footprint and make a real environmental impact.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: '01',
+                title: 'Calculate Your Impact',
+                description: 'We assess your carbon footprint through comprehensive analysis of your operations and activities.',
+                icon: BarChart
+              },
+              {
+                step: '02',
+                title: 'Choose Your Projects',
+                description: 'Select from our portfolio of verified renewable energy and conservation projects worldwide.',
+                icon: Globe
+              },
+              {
+                step: '03',
+                title: 'Track Your Progress',
+                description: 'Monitor real-time impact metrics and receive detailed reports on your environmental contribution.',
+                icon: TrendingUp
+              }
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.step} className="relative">
+                  {index < 2 && (
+                    <div className="hidden md:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-green-300 to-transparent z-0" />
+                  )}
+                  <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div className="text-6xl font-bold text-green-100 mb-4">{item.step}</div>
+                    <div className="bg-green-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors duration-300">
+                      <Icon className="w-8 h-8 text-green-600" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* Testimonials */}
