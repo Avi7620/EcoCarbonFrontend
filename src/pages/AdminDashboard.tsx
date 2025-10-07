@@ -50,51 +50,25 @@ function Admin() {
   ];
 
   // Fetch data from Flask API
-// Fetch data from Flask API
 const fetchData = async () => {
-  try {
-    setLoading(true);
-    const response = await fetch("https://ecocarbonbackend.onrender.com/api/contacts", {
-      credentials: "include",  // ✅ send session cookie
-    });
-
-    if (response.status === 401) {
-      setAuthorized(false); // session expired / not authorized
-      return;
+    try {
+      setLoading(true);
+      const response = await fetch("https://ecocarbonbackend.onrender.com/api/contacts");
+      const data = await response.json();
+      setFormSubmissions(data);
+    } catch (error) {
+      console.error("Error fetching submissions:", error);
+    } finally {
+      setLoading(false);
     }
-
-    const data = await response.json();
-    setFormSubmissions(data);
-  } catch (error) {
-    console.error("Error fetching submissions:", error);
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const res = await fetch("https://ecocarbonbackend.onrender.com/api/session", {
-          credentials: "include",
-        });
-        const data = await res.json();
-
-        if (!data.admin) {
-          setAuthorized(false); // unauthorized
-        } else {
-          setAuthorized(true); // allowed
-          fetchData(); // fetch submissions
-        }
-      } catch (err) {
-        console.error(err);
-        setAuthorized(false); // unauthorized
-      }
-    };
-
-    checkSession();
+    fetchData();
   }, []);
+
+
+
 
 
 
