@@ -12,49 +12,54 @@ const Contact = () => {
     message: ''
   });
 
-interface ContactFormData {
-  name: string;
-  email: string;
-  company: string;
-  phone: string;
-  service: string;
-  message: string;
-}
-
-interface ApiResponse {
-  error?: string;
-  [key: string]: any;
-}
-
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-  e.preventDefault();
-
-  try {
-    const response: Response = await fetch("https://ecocarbonbackend.onrender.com/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    const result: ApiResponse = await response.json();
-    if (response.ok) {
-      alert("Message sent successfully!");
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        service: "",
-        message: "",
-      });
-    } else {
-      alert(result.error || "Something went wrong!");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Failed to send message");
+  interface ContactFormData {
+    name: string;
+    email: string;
+    company: string;
+    phone: string;
+    service: string;
+    message: string;
   }
-};
+
+  interface ApiResponse {
+    error?: string;
+    [key: string]: any;
+  }
+
+  const [popup, setPopup] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
+
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response: Response = await fetch("https://ecocarbonbackend.onrender.com/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result: ApiResponse = await response.json();
+
+      if (response.ok) {
+        setPopup({ message: "Message sent successfully!", type: "success" });
+        setFormData({ name: "", email: "", company: "", phone: "", service: "", message: "" });
+      } else {
+        setPopup({ message: result.error || "Something went wrong!", type: "error" });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setPopup({ message: "Failed to send message", type: "error" });
+    } finally {
+      setLoading(false);
+      setTimeout(() => setPopup(null), 2000); // auto-hide after 3 seconds
+    }
+  };
+
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -109,16 +114,29 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
 
   return (
     <div className="pt-16">
+      {popup && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+          className={`fixed top-6 right-1/2 transform -translate-x-1/2 z-50 px-6 py-4 rounded-lg shadow-lg text-white ${popup.type === 'success' ? 'bg-green-600' : 'bg-red-600'
+            }`}
+        >
+          {popup.message}
+        </motion.div>
+      )}
+
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/1108175/pexels-photo-1108175.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop)'
           }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -126,7 +144,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
           >
             Contact Us
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -242,10 +260,21 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
                 </div>
                 <button
                   type="submit"
+                  disabled={loading} // disable while loading
                   className="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors duration-300 flex items-center justify-center font-medium"
                 >
-                  Send Message <Send className="ml-2 h-5 w-5" />
+                  {loading ? (
+                    <>
+                      Sending... <svg className="animate-spin h-5 w-5 ml-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                      </svg>
+                    </>
+                  ) : (
+                    <>Send Message <Send className="ml-2 h-5 w-5" /></>
+                  )}
                 </button>
+
               </form>
             </motion.div>
 
@@ -315,7 +344,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
       {/* Office Locations */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -335,8 +364,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white rounded-xl shadow-lg overflow-hidden"
               >
-                <img 
-                  src={office.image} 
+                <img
+                  src={office.image}
                   alt={office.city}
                   className="w-full h-48 object-cover"
                 />
@@ -359,7 +388,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> 
         </div>
       </section>
 
-     
+
     </div>
   );
 };

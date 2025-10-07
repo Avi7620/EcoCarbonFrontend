@@ -3,9 +3,9 @@ import { ArrowRight, Leaf, Wind, Sun, Trees, ArrowDown, BarChart, Globe, Trendin
 import { Link } from 'react-router-dom';
 import { useCallback, useRef, useEffect, useState } from 'react';
 import AnimatedCounter from '../components/AnimatedCounter';
-
 import ChatBotButton from '../components/ChatBotButton';
 import Contact from '../pages/Contact';
+import ParticlesBackground from '../components/ParticlesBackground';
 
 const Home = () => {
 
@@ -107,61 +107,9 @@ const Home = () => {
 
     <div className="pt-16">
 
-      
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(images/s2c.png)'
-          }}
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
-          >
-            Building a Sustainable
-            <span className="text-green-400 block">Future Together</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto"
-          >
-            Leading carbon offset solutions through renewable energy, forest conservation, and innovative sustainability projects.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            {/* <Link
-              to="/projects"
-              className="bg-green-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
-            >
-              Explore Projects <ArrowRight className="ml-2 h-5 w-5" />
-            </Link> */}
-            <Link
-              to="/contact"
-              className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-900 transition-all duration-300 transform hover:scale-90"
-            >
-              Get Started
-            </Link>
-          </motion.div>
 
-        </div>
-        <button
-          onClick={scrollToFooter}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white hover:text-green-300 transition-colors animate-bounce"
-        >
-          <ArrowDown className="h-8 w-8" />
-        </button>
-      </section>
+      
+<ParticlesBackground />
 
        
        {/* Features Section */}

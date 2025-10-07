@@ -12,6 +12,7 @@ import Admin from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import ScrollRestoration from './components/ScrollRestoration';
 import ChatBot from './components/ChatBot';
+import ParticlesBackground from './components/ParticlesBackground';
 
 import ChatBotButton from './components/ChatBotButton';
 
@@ -45,6 +46,8 @@ function App() {
             <Route path="/Admin" element={<Admin />} />
             <Route path="/AdminLogin" element={<AdminLogin />} />
             <Route path="/ChatBot" element={<ChatBot isOpen={true} onClose={() => {}} />} />
+              
+            <Route path="/ParticlesBackground" element={<ParticlesBackground />} />
            
           </Routes>
         </motion.main>
