@@ -14,7 +14,9 @@ import {
   ChevronDown,
   TrendingUp,
   Clock,
-  CheckCircle
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 
@@ -36,6 +38,8 @@ function Admin() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedService, setSelectedService] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // Services options (you can customize these based on your dropdown)
   const servicesOptions = [
@@ -80,6 +84,21 @@ const fetchData = async () => {
     const matchesService = selectedService === 'all' || submission.service === selectedService;
     return matchesSearch && matchesService;
   });
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredSubmissions.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedSubmissions = filteredSubmissions.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedService]);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+  };
 
   // Calculate statistics
   const totalSubmissions = formSubmissions.length;
@@ -328,13 +347,34 @@ const fetchData = async () => {
           ) : (
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                  <MessageSquare className="w-5 h-5 mr-2 text-blue-600" />
-                  Form Submissions
-                </h3>
-                <p className="text-sm text-gray-500 mt-1">
-                  Showing {filteredSubmissions.length} of {totalSubmissions} submissions
-                </p>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                      <MessageSquare className="w-5 h-5 mr-2 text-blue-600" />
+                      Form Submissions
+                    </h3>
+                    <p className="text-sm text-gray-500 mt-1">
+                      Showing {startIndex + 1}-{Math.min(endIndex, filteredSubmissions.length)} of {filteredSubmissions.length} submissions
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <label className="text-sm text-gray-600">Per page:</label>
+                    <select
+                      value={itemsPerPage}
+                      onChange={(e) => {
+                        setItemsPerPage(Number(e.target.value));
+                        setCurrentPage(1);
+                      }}
+                      className="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value={5}>5</option>
+                      <option value={10}>10</option>
+                      <option value={25}>25</option>
+                      <option value={50}>50</option>
+                      <option value={100}>100</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div className="overflow-x-auto">
@@ -351,7 +391,7 @@ const fetchData = async () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {filteredSubmissions.map((submission, index) => (
+                    {paginatedSubmissions.map((submission, index) => (
                       <tr key={submission.id} className={`hover:bg-blue-50 transition-all duration-200 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
@@ -409,7 +449,7 @@ const fetchData = async () => {
                         </td>
                       </tr>
                     ))}
-                    {filteredSubmissions.length === 0 && (
+                    {paginatedSubmissions.length === 0 && filteredSubmissions.length === 0 && (
                       <tr>
                         <td colSpan={7} className="text-center py-16">
                           <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -421,6 +461,81 @@ const fetchData = async () => {
                   </tbody>
                 </table>
               </div>
+
+              {/* Pagination Controls */}
+              {filteredSubmissions.length > 0 && (
+                <div className="p-6 border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="text-sm text-gray-600">
+                      Page {currentPage} of {totalPages}
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => goToPage(1)}
+                        disabled={currentPage === 1}
+                        className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                      >
+                        First
+                      </button>
+
+                      <button
+                        onClick={() => goToPage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+
+                      {/* Page Numbers */}
+                      <div className="flex items-center space-x-1">
+                        {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                          let pageNum;
+                          if (totalPages <= 5) {
+                            pageNum = i + 1;
+                          } else if (currentPage <= 3) {
+                            pageNum = i + 1;
+                          } else if (currentPage >= totalPages - 2) {
+                            pageNum = totalPages - 4 + i;
+                          } else {
+                            pageNum = currentPage - 2 + i;
+                          }
+
+                          return (
+                            <button
+                              key={pageNum}
+                              onClick={() => goToPage(pageNum)}
+                              className={`px-4 py-2 rounded-lg transition-all duration-200 ${
+                                currentPage === pageNum
+                                  ? 'bg-blue-600 text-white shadow-md'
+                                  : 'border border-gray-300 hover:bg-gray-50'
+                              }`}
+                            >
+                              {pageNum}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      <button
+                        onClick={() => goToPage(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+
+                      <button
+                        onClick={() => goToPage(totalPages)}
+                        disabled={currentPage === totalPages}
+                        className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                      >
+                        Last
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
