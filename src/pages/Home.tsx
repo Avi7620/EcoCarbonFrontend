@@ -7,6 +7,8 @@ import ChatBotButton from '../components/ChatBotButton';
 import ContactHome from '../pages/ContactHome';
 import ParticlesBackground from '../components/ParticlesBackground';
 import Ani from '../components/ani';
+import { ThreeJSAnimation } from '../components/Three';
+
 
 const Home = () => {
 
@@ -340,6 +342,8 @@ const Home = () => {
         </div>
         {/* <div> <AnimatedCounter /></div> */}
       </section>
+
+
 
 {/* How It Works Section */}
 <section className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">

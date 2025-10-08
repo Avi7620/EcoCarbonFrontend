@@ -28,9 +28,50 @@ const ChatBot: React.FC<ChatBotProps> = ({ isOpen, onClose }) => {
   const chatRef = useRef<HTMLDivElement>(null);
 
   const customQA: QAItem[] = [
-    { keywords: ["location", "address"], answer: `Office:\nKonark Alpha, Sr No 50, 2, Nagar Road, Kharadi, Pune` },
-    { keywords: ["phone", "contact"], answer: "+91 XXX XXX XXX" },
-    { keywords: ["ecocarbon"], answer: "EcoCarbon is a modern web platform showcasing projects." },
+{
+          keywords: ["location", "where are you located", "address", "office location", "location address", "where is your office"],
+      answer: `Office:
+Konark Alpha, Sr No 50, 2, Nagar Road, Kharadi, Pune, Maharashtra`
+    },
+        {
+      keywords: ["phone","phon", "give me phone number", "mobilenumber", "call", "number", "contact number", "phone number", "mobile", "whatsapp", "whatsapp number"],
+      answer: "+91 XXX XXX XXX"
+    },
+    {
+      keywords: ["ecocarbon", "what is ecocarbon", "eco carbon", "about ecocarbon", "about eco carbon", "tell me about ecocarbon", "tell me about eco carbon", "ecocarbon website", "eco carbon website"],
+      answer: "EcoCarbon is a modern web platform for showcasing interior design projects, featuring before–after visuals, service details, and an elegant layout to attract potential clients."
+    },
+    {
+      keywords: ["contact", "contact info", "email", "office", "business hours"],
+      answer: `Email:
+info@ecocarbon.com
+support@ecocarbon.com
+
+Office:
+Konark Alpha, Sr No 50, 2, Nagar Road, Kharadi, Pune, Maharashtra
+
+Business Hours:
+Mon - Fri: 9:00 AM - 6:00 PM
+Sat: 10:00 AM - 4:00 PM`
+    },
+    {
+      keywords: ["projects", "project names", "current projects", "project list"],
+      answer: `Current EcoCarbon projects:
+1. Amazon Rainforest Conservation
+2. Wind Power Initiative
+3. Mangrove Restoration
+4. Solar Farm Project`
+    },
+    {
+      keywords: ["services", "service names", "offerings", "service list"],
+      answer: `EcoCarbon offers the following services:
+1. Carbon Offsetting
+2. Renewable Energy Projects
+3. Forest Conservation
+4. Sustainability Consulting
+5. Solar Energy Solutions
+6. Community Programs`
+    }
   ];
 
   const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
