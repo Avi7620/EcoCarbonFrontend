@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useCallback, useRef, useEffect, useState } from 'react';
 import AnimatedCounter from '../components/AnimatedCounter';
 import ChatBotButton from '../components/ChatBotButton';
-import Contact from '../pages/Contact';
+import ContactHome from '../pages/ContactHome';
 import ParticlesBackground from '../components/ParticlesBackground';
 import Ani from '../components/ani';
 
@@ -337,7 +337,7 @@ const Home = () => {
             })}
           </div>
         </div>
-        <div> <AnimatedCounter /></div>
+        {/* <div> <AnimatedCounter /></div> */}
       </section>
 
 {/* How It Works Section */}
@@ -549,6 +549,7 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+      
 
       {/* Contact Form Section */}
       {/* <section className="py-20 bg-gray-50">
@@ -557,7 +558,7 @@ const Home = () => {
         </div>
       </section>  */}
 
-     
+     <ContactHome/>
 
     </div>
   );
