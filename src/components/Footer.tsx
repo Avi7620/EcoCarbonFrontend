@@ -18,17 +18,17 @@ const Footer: React.FC = () => {
         'Green Technology'
       ]
     },
-    {
-      title: 'Resources',
-      links: [
-        'Impact Reports',
-        'Case Studies',
-        'Carbon Calculator',
-        'Knowledge Base',
-        'Webinars',
-        'Blog'
-      ]
-    },
+    // {
+    //   title: 'Resources',
+    //   links: [
+    //     'Impact Reports',
+    //     'Case Studies',
+    //     'Carbon Calculator',
+    //     'Knowledge Base',
+    //     'Webinars',
+    //     'Blog'
+    //   ]
+    // },
     {
       title: 'Company',
       links: [
@@ -40,17 +40,17 @@ const Footer: React.FC = () => {
         'Investors'
       ]
     },
-    {
-      title: 'Support',
-      links: [
-        'Help Center',
-        'Contact Us',
-        'API Documentation',
-        'System Status',
-        'Privacy Policy',
-        'Terms of Service'
-      ]
-    }
+    // {
+    //   title: 'Support',
+    //   links: [
+    //     'Help Center',
+    //     'Contact Us',
+    //     'API Documentation',
+    //     'System Status',
+    //     'Privacy Policy',
+    //     'Terms of Service'
+    //   ]
+    // }
   ];
   return (
     <footer id="footer" className="bg-gray-900 text-white">
@@ -70,26 +70,7 @@ const Footer: React.FC = () => {
                 verified carbon credits and innovative environmental solutions.
               </p>
 
-              {/* Small contact form for mobile screens */}
-              <form className="block md:hidden bg-gray-800 p-3 rounded-lg space-y-2 mt-4">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  className="w-full px-2 py-1 rounded bg-gray-900 text-white border border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs"
-                />
-                <textarea
-                  placeholder="Message"
-                  className="w-full px-2 py-1 rounded bg-gray-900 text-white border border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs"
-                  rows={2}
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-1 rounded font-medium transition-colors text-xs"
-                >
-                  Send
-                </button>
-              </form>
-
+              
               {/* Let's Connect section */}
               <div className="mt-6">
                 <h4 className="text-lg font-semibold mb-2">Let's Connect</h4>
@@ -163,6 +144,16 @@ const Footer: React.FC = () => {
               © 2024 EcoCarbon Solutions. All rights reserved.
             </div>
 
+             <div className="text-2xl font-bold mb-4">
+                         <button
+                onClick={scrollToTop}
+                className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"
+                aria-label="Back to top"
+              >
+                <ArrowUp className="h-4 w-4" />
+              </button>
+            </div>
+
             <div className="flex items-center space-x-6">
               <div className="flex space-x-6 text-sm text-gray-400">
                 <button className="hover:text-green-400 transition-colors">Privacy Policy</button>
@@ -170,13 +161,7 @@ const Footer: React.FC = () => {
                 <button className="hover:text-green-400 transition-colors">Cookie Policy</button>
               </div>
 
-              <button
-                onClick={scrollToTop}
-                className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"
-                aria-label="Back to top"
-              >
-                <ArrowUp className="h-4 w-4" />
-              </button>
+   
             </div>
           </div>
         </div>
