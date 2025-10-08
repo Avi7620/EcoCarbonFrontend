@@ -112,9 +112,10 @@ const Home = () => {
       
 <ParticlesBackground />
 
+
        
        {/* Features Section */}
-      <section id="stats" className="py-20 bg-white">
+      <section id="stats" className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
         
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
@@ -341,7 +342,7 @@ const Home = () => {
       </section>
 
 {/* How It Works Section */}
-<section className="relative py-20 bg-gradient-to-br from-green-50 to-white overflow-hidden">
+<section className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
 
 
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -407,7 +408,7 @@ const Home = () => {
 
 
       {/* Testimonials */}
-      <section className="py-20 bg-white overflow-hidden">
+      <section className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -557,8 +558,10 @@ const Home = () => {
           <Contact />
         </div>
       </section>  */}
-
-     <ContactHome/>
+  <section className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
+<ContactHome/>
+  </section>
+     
 
     </div>
   );
