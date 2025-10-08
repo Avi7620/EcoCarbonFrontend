@@ -108,7 +108,7 @@ const ContactHome = () => {
           We're here to help you achieve your sustainability goals. Contact us today to learn more about our carbon offset solutions.
         </p>
       </section>
-
+      
       {/* Contact Form & Info */}
       <section className="py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

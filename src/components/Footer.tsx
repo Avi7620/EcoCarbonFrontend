@@ -1,5 +1,5 @@
 import React from 'react';
-import { Leaf, Mail, Phone, ArrowUp } from 'lucide-react';
+import { Leaf, ArrowUp } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -15,20 +15,9 @@ const Footer: React.FC = () => {
         'Corporate Programs',
         'Project Verification',
         'Carbon Marketplace',
-        'Green Technology'
-      ]
+        'Green Technology',
+      ],
     },
-    // {
-    //   title: 'Resources',
-    //   links: [
-    //     'Impact Reports',
-    //     'Case Studies',
-    //     'Carbon Calculator',
-    //     'Knowledge Base',
-    //     'Webinars',
-    //     'Blog'
-    //   ]
-    // },
     {
       title: 'Company',
       links: [
@@ -37,29 +26,19 @@ const Footer: React.FC = () => {
         'Careers',
         'Press',
         'Partners',
-        'Investors'
-      ]
+        'Investors',
+      ],
     },
-    // {
-    //   title: 'Support',
-    //   links: [
-    //     'Help Center',
-    //     'Contact Us',
-    //     'API Documentation',
-    //     'System Status',
-    //     'Privacy Policy',
-    //     'Terms of Service'
-    //   ]
-    // }
   ];
+
   return (
     <footer id="footer" className="bg-gray-900 text-white">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 sm:px-10 md:px-16">
         {/* Main Footer Content */}
         <div className="py-16">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-12">
-            {/* Company Info */}
-            <div className="col-span-2 lg:col-span-2">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-12 relative">
+            {/* Company Info + Newsletter */}
+            <div className="col-span-2 lg:col-span-2 ml-8 sm:ml-12">
               <div className="flex items-center space-x-2 mb-6">
                 <Leaf className="h-8 w-8 text-green-400" />
                 <span className="text-2xl font-bold">EcoCarbon Solutions</span>
@@ -70,35 +49,25 @@ const Footer: React.FC = () => {
                 verified carbon credits and innovative environmental solutions.
               </p>
 
-              
-              {/* Let's Connect section */}
-              <div className="mt-6">
-                <h4 className="text-lg font-semibold mb-2">Let's Connect</h4>
-                <div className="flex flex-row flex-wrap items-center gap-x-4 gap-y-2 text-gray-300 text-[11px] sm:text-sm">
-                  <div className="flex items-center space-x-1">
-                    <Mail className="h-4 w-4 text-green-400" />
-                    <span>contact@ecocarbon.com</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Phone className="h-4 w-4 text-green-400" />
-                    <span>+91 XXX XXX XXX</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <span className="font-semibold text-green-400">Address:</span>
-                    <span>Konark Apha , Kharadi , Pune</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <span className="font-semibold text-green-400">Hours:</span>
-                    <span>Mon-Fri 9am-6pm</span>
-                  </div>
+              {/* Newsletter Signup */}
+              <div className="max-w-md mx-auto sm:mx-0">
+                <h3 className="text-2xl font-bold mb-4">Stay Updated on Climate Action</h3>
+                <div className="flex flex-col sm:flex-row gap-4 w-full">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
+                  <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors whitespace-nowrap">
+                    Subscribe
+                  </button>
                 </div>
               </div>
-
             </div>
 
             {/* Footer Links */}
             {footerSections.map((section, index) => (
-              <div key={index}>
+              <div key={index} className="ml-8 sm:ml-12">
                 <h3 className="text-lg font-semibold mb-6">{section.title}</h3>
                 <ul className="space-y-3">
                   {section.links.map((link, linkIndex) => (
@@ -111,58 +80,39 @@ const Footer: React.FC = () => {
                 </ul>
               </div>
             ))}
-          </div>
-        </div>
+{/* Contact Image (Desktop Only) */}
+<div className="hidden lg:flex lg:col-span-2 justify-center items-center">
+  <img
+    src="/images/s2c.png" // your image path
+    alt="Contact Us"
+    className="w-80 h-80 object-cover rounded-xl shadow-lg" 
+  />
+</div>
 
-        {/* Newsletter Signup */}
-        <div className="border-t border-gray-800 py-12">
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl font-bold mb-4">
-              Stay Updated on Climate Action
-            </h3>
-            <p className="text-gray-300 mb-6">
-              Get the latest insights on carbon markets, sustainability trends, and project updates
-            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors whitespace-nowrap">
-                Subscribe
-              </button>
-            </div>
           </div>
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-gray-800 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2024 EcoCarbon Solutions. All rights reserved.
-            </div>
+        <div className="border-t border-gray-800 py-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-gray-400 text-sm mb-4 md:mb-0">
+            © 2024 EcoCarbon Solutions. All rights reserved.
+          </div>
 
-             <div className="text-2xl font-bold mb-4">
-                         <button
-                onClick={scrollToTop}
-                className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"
-                aria-label="Back to top"
-              >
-                <ArrowUp className="h-4 w-4" />
-              </button>
-            </div>
+          <div className="text-2xl font-bold mb-4">
+            <button
+              onClick={scrollToTop}
+              className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"
+              aria-label="Back to top"
+            >
+              <ArrowUp className="h-4 w-4" />
+            </button>
+          </div>
 
-            <div className="flex items-center space-x-6">
-              <div className="flex space-x-6 text-sm text-gray-400">
-                <button className="hover:text-green-400 transition-colors">Privacy Policy</button>
-                <button className="hover:text-green-400 transition-colors">Terms of Service</button>
-                <button className="hover:text-green-400 transition-colors">Cookie Policy</button>
-              </div>
-
-   
-            </div>
+          <div className="flex items-center space-x-6">
+            <button className="hover:text-green-400 transition-colors">Privacy Policy</button>
+            <button className="hover:text-green-400 transition-colors">Terms of Service</button>
+            <button className="hover:text-green-400 transition-colors">Cookie Policy</button>
           </div>
         </div>
       </div>
