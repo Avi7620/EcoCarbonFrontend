@@ -133,86 +133,99 @@ const Home = () => {
             </p>
           </motion.div>
 
-          {/* Mobile: Horizontal Scroll */}
-          <div className="md:hidden">
-            <div className="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex-shrink-0 w-[85vw] snap-center"
-                >
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-[500px] group">
-                    <img
-                      src={feature.image}
-                      alt={feature.title}
-                      className="w-full h-full object-cover"
-                    />
+         {/* Mobile: Horizontal Scroll (Compact Version) */}
+<div className="md:hidden">
+  <div className="flex gap-3 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide -mx-3 px-3">
+    {features.map((feature, index) => (
+      <motion.div
+        key={feature.title}
+        initial={{ opacity: 0, x: 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="flex-shrink-0 w-[78vw] snap-center"
+      >
+        <div className="relative overflow-hidden rounded-xl shadow-lg h-[380px] group">
+          <img
+            src={feature.image}
+            alt={feature.title}
+            className="w-full h-full object-cover"
+          />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
 
-                    <motion.div
-                      initial={{ scale: 0, rotate: -180 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
-                      className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm w-14 h-14 rounded-xl flex items-center justify-center text-green-600 shadow-lg z-20"
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
+            className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm w-10 h-10 rounded-lg flex items-center justify-center text-green-600 shadow-md z-20"
+          >
+            {feature.icon}
+          </motion.div>
+
+          <div className="absolute inset-x-0 bottom-0 p-4 z-10">
+            <div className="inline-flex items-center gap-1 bg-green-500/90 backdrop-blur-sm text-white px-2 py-1 rounded-full mb-2">
+              <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+              <span className="font-semibold text-[10px]">Solution {index + 1}</span>
+            </div>
+
+            <h3 className="text-lg font-bold text-white mb-2 leading-snug">
+              {feature.title}
+            </h3>
+
+            <p className="text-gray-200 text-xs leading-relaxed mb-3 line-clamp-3">
+              {feature.description}
+            </p>
+
+            <div className="space-y-1.5 mb-3">
+              {[
+                'Verified carbon reduction',
+                'Real-time impact tracking',
+                'Global project network',
+              ].map((benefit) => (
+                <div key={benefit} className="flex items-center gap-1.5">
+                  <div className="bg-green-500/80 backdrop-blur-sm rounded-full p-[3px] flex-shrink-0">
+                    <svg
+                      className="w-2.5 h-2.5 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      {feature.icon}
-                    </motion.div>
-
-                    <div className="absolute inset-x-0 bottom-0 p-6 z-10">
-                      <div className="inline-flex items-center gap-2 bg-green-500/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full mb-3">
-                        <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                        <span className="font-semibold text-xs">Solution {index + 1}</span>
-                      </div>
-
-                      <h3 className="text-2xl font-bold text-white mb-3 leading-tight">
-                        {feature.title}
-                      </h3>
-
-                      <p className="text-gray-200 text-sm leading-relaxed mb-4">
-                        {feature.description}
-                      </p>
-
-                      <div className="space-y-2 mb-4">
-                        {[
-                          'Verified carbon reduction',
-                          'Real-time impact tracking',
-                          'Global project network'
-                        ].map((benefit, i) => (
-                          <div key={benefit} className="flex items-center gap-2">
-                            <div className="bg-green-500/80 backdrop-blur-sm rounded-full p-1 flex-shrink-0">
-                              <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                              </svg>
-                            </div>
-                            <span className="text-white text-xs">{benefit}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <Link
-                        to="/projects"
-                        className="inline-flex items-center gap-2 bg-white text-green-700 px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-green-50 transition-all duration-300 shadow-lg"
-                      >
-                        Learn More
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={3}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
                   </div>
-                </motion.div>
+                  <span className="text-white text-[11px]">{benefit}</span>
+                </div>
               ))}
             </div>
-            <div className="flex justify-center gap-2 mt-6">
-              {features.map((_, index) => (
-                <div key={index} className="w-2 h-2 rounded-full bg-gray-300"></div>
-              ))}
-            </div>
+
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-1.5 bg-white text-green-700 px-4 py-1.5 rounded-full font-semibold text-xs hover:bg-green-50 transition-all duration-300 shadow-md"
+            >
+              Learn More
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+
+  {/* Pagination dots */}
+  <div className="flex justify-center gap-1.5 mt-4">
+    {features.map((_, index) => (
+      <div key={index} className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+    ))}
+  </div>
+</div>
+
 
           {/* Desktop: Alternating Layout */}
           <div className="hidden md:block space-y-32">
@@ -346,40 +359,40 @@ const Home = () => {
 
 
 {/* How It Works Section */}
-<section className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
-
-
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+<section className="relative py-6 sm:py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
+  <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
+    {/* Header */}
+    <div className="text-center mb-8 sm:mb-12">
+      <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-2">
         How It Works
       </h2>
-      <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+      <p className="text-sm sm:text-lg text-gray-600 max-w-xl mx-auto leading-snug">
         Simple steps to offset your carbon footprint and make a real environmental impact.
       </p>
     </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {/* Steps Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
       {[
         {
           step: '01',
           title: 'Calculate Your Impact',
           description:
-            'We assess your carbon footprint through comprehensive analysis of your operations and activities.',
+            'We assess your carbon footprint through comprehensive analysis of your activities.',
           icon: BarChart,
         },
         {
           step: '02',
           title: 'Choose Your Projects',
           description:
-            'Select from our portfolio of verified renewable energy and conservation projects worldwide.',
+            'Select from verified renewable energy and conservation projects worldwide.',
           icon: Globe,
         },
         {
           step: '03',
           title: 'Track Your Progress',
           description:
-            'Monitor real-time impact metrics and receive detailed reports on your environmental contribution.',
+            'Monitor real-time impact metrics and view detailed sustainability reports.',
           icon: TrendingUp,
         },
       ].map((item, index) => {
@@ -387,19 +400,19 @@ const Home = () => {
         return (
           <div key={item.step} className="relative">
             {index < 2 && (
-              <div className="hidden md:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-green-300 to-transparent z-0" />
+              <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-green-300 to-transparent z-0" />
             )}
-            <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-6xl font-bold text-green-100 mb-4">
+            <div className="relative bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-md hover:shadow-xl transition-all duration-300">
+              <div className="text-3xl sm:text-5xl font-bold text-black-100 mb-2 sm:mb-4">
                 {item.step}
               </div>
-              <div className="bg-green-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors duration-300">
-                <Icon className="w-8 h-8 text-green-600" />
+              <div className="bg-green-100 w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5">
+                <Icon className="w-5 h-5 sm:w-7 sm:h-7 text-green-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              <h3 className="text-lg sm:text-2xl font-semibold text-gray-900 mb-1 sm:mb-3">
                 {item.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-xs sm:text-base text-gray-600 leading-snug">
                 {item.description}
               </p>
             </div>
@@ -411,122 +424,137 @@ const Home = () => {
 </section>
 
 
-      {/* Testimonials */}
-      <section className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+
+{/* Testimonials */}
+<section className="relative py-6 sm:py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
+  <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 mb-8 sm:mb-12">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-center"
+    >
+      <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
+        What Our Clients Say
+      </h2>
+      <p className="text-sm sm:text-lg text-gray-600 max-w-2xl mx-auto leading-snug">
+        Trusted by leading companies worldwide to achieve their sustainability goals.
+      </p>
+    </motion.div>
+  </div>
+
+  {isMobile ? (
+    // Mobile layout — horizontal scroll
+    <div className="relative">
+      <div
+        ref={scrollContainerRef}
+        className="flex gap-4 overflow-x-auto pb-6 px-3 snap-x snap-mandatory scrollbar-hide"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch',
+        }}
+      >
+        {testimonials.map((testimonial, index) => (
           <motion.div
+            key={testimonial.name}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="flex-shrink-0 w-64 sm:w-80 snap-center"
+          >
+            <div className="bg-gradient-to-br from-white to-green-50 rounded-xl p-4 sm:p-6 shadow-md border border-green-100 h-full">
+              <div className="flex gap-1 mb-2 sm:mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <svg
+                    key={i}
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 sm:mb-6 italic text-sm sm:text-lg leading-snug">
+                "{testimonial.text}"
+              </p>
+              <div className="flex items-center pt-3 border-t border-green-200">
+                <div className="relative">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mr-3 sm:mr-4 object-cover ring-2 ring-green-200"
+                  />
+                  <div className="absolute -bottom-1 -right-1 bg-green-500 w-3 h-3 sm:w-5 sm:h-5 rounded-full border-2 border-white"></div>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 text-sm sm:text-lg">{testimonial.name}</h4>
+                  <p className="text-green-600 text-xs sm:text-sm font-medium">{testimonial.company}</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Dots below */}
+      <div className="flex justify-center gap-1 sm:gap-2 mt-3 sm:mt-4">
+        {testimonials.map((_, index) => (
+          <div
+            key={index}
+            className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-gray-300"
+          ></div>
+        ))}
+      </div>
+    </div>
+  ) : (
+    // Desktop grid
+    <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {testimonials.slice(0, 3).map((testimonial, index) => (
+          <motion.div
+            key={testimonial.name}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            whileHover={{ y: -6, transition: { duration: 0.3 } }}
+            className="bg-gradient-to-br from-white to-green-50 rounded-xl p-5 sm:p-6 shadow-lg border border-green-100 hover:shadow-2xl transition-all duration-300"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Trusted by leading companies worldwide to achieve their sustainability goals.
+            <div className="flex gap-1 mb-3 sm:mb-4">
+              {[...Array(testimonial.rating)].map((_, i) => (
+                <svg
+                  key={i}
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                </svg>
+              ))}
+            </div>
+            <p className="text-gray-700 mb-5 sm:mb-6 italic text-sm sm:text-lg leading-snug">
+              "{testimonial.text}"
             </p>
+            <div className="flex items-center pt-3 border-t border-green-200">
+              <div className="relative">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mr-3 sm:mr-4 object-cover ring-2 ring-green-200"
+                />
+                <div className="absolute -bottom-1 -right-1 bg-green-500 w-3 h-3 sm:w-5 sm:h-5 rounded-full border-2 border-white"></div>
+              </div>
+              <div>
+                <h4 className="font-bold text-gray-900 text-sm sm:text-lg">{testimonial.name}</h4>
+                <p className="text-green-600 text-xs sm:text-sm font-medium">{testimonial.company}</p>
+              </div>
+            </div>
           </motion.div>
-        </div>
+        ))}
+      </div>
+    </div>
+  )}
+</section>
 
-        {isMobile ? (
-          <div className="relative">
-            <div
-              ref={scrollContainerRef}
-              className="flex gap-6 overflow-x-auto pb-8 px-4 snap-x snap-mandatory scrollbar-hide"
-              style={{
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-                WebkitOverflowScrolling: 'touch'
-              }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.name}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex-shrink-0 w-80 snap-center"
-                >
-                  <div className="bg-gradient-to-br from-white to-green-50 rounded-2xl p-6 shadow-xl border border-green-100 h-full">
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-yellow-400 fill-current"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="text-gray-700 mb-6 italic text-lg leading-relaxed">"{testimonial.text}"</p>
-                    <div className="flex items-center pt-4 border-t border-green-200">
-                      <div className="relative">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-14 h-14 rounded-full mr-4 object-cover ring-2 ring-green-200"
-                        />
-                        <div className="absolute -bottom-1 -right-1 bg-green-500 w-5 h-5 rounded-full border-2 border-white"></div>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-gray-900 text-lg">{testimonial.name}</h4>
-                        <p className="text-green-600 text-sm font-medium">{testimonial.company}</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <div className="flex justify-center gap-2 mt-4">
-              {testimonials.map((_, index) => (
-                <div key={index} className="w-2 h-2 rounded-full bg-gray-300"></div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {testimonials.slice(0, 3).map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                  className="bg-gradient-to-br from-white to-green-50 rounded-2xl p-6 shadow-xl border border-green-100 hover:shadow-2xl transition-all duration-300"
-                >
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <svg
-                        key={i}
-                        className="w-5 h-5 text-yellow-400 fill-current"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-6 italic text-lg leading-relaxed">"{testimonial.text}"</p>
-                  <div className="flex items-center pt-4 border-t border-green-200">
-                    <div className="relative">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-14 h-14 rounded-full mr-4 object-cover ring-2 ring-green-200"
-                      />
-                      <div className="absolute -bottom-1 -right-1 bg-green-500 w-5 h-5 rounded-full border-2 border-white"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-900 text-lg">{testimonial.name}</h4>
-                      <p className="text-green-600 text-sm font-medium">{testimonial.company}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
-      </section>
 
 
 
@@ -562,7 +590,7 @@ const Home = () => {
           <Contact />
         </div>
       </section>  */}
-  <section className="relative py-10 bg-gradient-to-br from-green-50 to-white overflow-hidden">
+  <section className="relative py-0 bg-gradient-to-br from-green-50 to-white overflow-hidden">
 <ContactHome/>
   </section>
      
